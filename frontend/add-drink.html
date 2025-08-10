@@ -1,0 +1,67 @@
+<!-- add-drink.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Drink - CoolDrink Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section id="header">
+    <div class="logo"><img src="logo.png" alt="" /></div>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="wine"><a class="active" href="add-drink.html"><i class="fa-solid fa-martini-glass-citrus"></i>Add</a></li>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="#" id="close"><i class="fa fa-times"></i></a>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-p1">
+    <h2>Add New Drink</h2>
+    <form id="drinkForm" enctype="multipart/form-data">
+      <input type="text" name="title" placeholder="Drink Title" required />
+      <input type="number" name="price" placeholder="Price" required />
+      <input type="text" name="details" placeholder="Details (e.g., 500ml)" required />
+      <input type="text" name="location" placeholder="Location" required />
+      <input type="file" name="image" accept="image/*" required />
+      <button type="submit">Add Drink</button>
+    </form>
+    <p id="message"></p>
+  </section>
+
+  <script>
+    document.getElementById("drinkForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      try {
+        const res = await fetch("http://localhost:4001/api/v1/drinks", {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await res.json();
+        if (res.ok) {
+          document.getElementById("message").textContent = "✅ Drink added successfully!";
+          e.target.reset();
+        } else {
+          document.getElementById("message").textContent = "❌ Failed: " + (result.error || "Unknown error");
+        }
+      } catch (err) {
+        console.error("Error:", err);
+        document.getElementById("message").textContent = "❌ Something went wrong.";
+      }
+    });
+  </script>
+
+  <footer><p>&copy; 2025 CoolDrink Online. All rights reserved.</p></footer>
+</body>
+</html>
