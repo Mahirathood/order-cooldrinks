@@ -1,0 +1,11 @@
+{
+  "name": "cooldrinks-order",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "cd Backend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
