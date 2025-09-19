@@ -36,8 +36,8 @@ app.use("/uploads", express.static(join(__dirname, "../uploads")));
 
 // Serve frontend static files
 app.use(express.static(join(__dirname, "../Frontend")));
-app.get("/", (req, res) => {
-  res.sendFile(join(__dirname, "../Frontend/index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "../Frontend", "index.html"));
 });
 
 // MongoDB connection
