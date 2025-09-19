@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop CoolDrinks</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/c7cfece0a6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Header -->
+  <section id="header">
+    <div class="logo"><img src="logo.png" alt="Logo"/></div>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="shop.html">Shop</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="wine"><a href="add-drink.html"><i class="fa-solid fa-martini-glass-citrus"></i>Add</a></li>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <li><a href="trending_drink.html">Trending</a></li>
+        <a href="#" id="close"><i class="fa fa-times"></i></a>
+      </ul>
+    </div>
+  </section>
+  <!-- Dynamic drinks from backend -->
+  <section id="products-dynamic" class="section-p1">
+    <h2>New CoolDrink</h2>
+    <p>Explore our refreshing selection, delivered straight from the source</p>
+    <!-- <div id="drink-list" class="pro-container"></div> -->
+    <div id="drink-list" class="drink-card-container"></div>
+  </section>
+  <!--Static Specials -->
+  <section id="products1" class="section-p1">
+    <h2>CoolDrink Specials</h2>
+    <p>Freshly Arrived — Limited Edition Flavours</p>
+    <div class="pro-container">
+      <div class="pro">
+        <img src="ammul.jpg" alt="">
+        <div class="des">
+          <span>Ammul Cool</span>
+          <h5>Quantity 250 ML</h5>
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p>Price: ₹20</p>
+        </div>
+        <a href="#" onclick="addToCart('Ammul Cool', 20, 'ammul.jpg')">
+          <i class="fa-solid fa-cart-plus cart"></i>
+        </a>
+      </div>
+      <div class="pro">
+        <img src="frooti.jpg" alt="">
+        <div class="des">
+          <span>Frooti</span>
+          <h5>Quantity 250 ML</h5>
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p>Price: ₹20</p>
+        </div>
+        <a href="#" onclick="addToCart('Frooti', 20, 'frooti.jpg')">
+          <i class="fa-solid fa-cart-plus cart"></i>
+        </a>
+      </div>
+      <!-- Add other static products here in the same format -->
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="section-p1" id="site-footer">
+    <div class="col">
+      <h4>Follow Us</h4>
+      <div class="icon">
+        <i href="#" class="fab fa-facebook-f"></i>
+        <i href="#" class="fab fa-instagram"></i>
+        <i href="#" class="fab fa-twitter"></i>
+        <i href="#" class="fab fa-youtube"></i>
+      </div>
+    </div>
+  </footer>
+  <footer><p>&copy; 2025 CoolDrink Online. All rights reserved.</p></footer>
+  <!-- Script -->
+  <script>
+    // Load dynamic drinks from backend
+    async function loadDrinks() {
+      try {
+        const res = await fetch("http://localhost:8090/api/drinks");
+        const drinks = await res.json();
+        const drinkList = document.getElementById("drink-list");
+        drinkList.innerHTML = "";
+        drinks.forEach((drink) => {
+         const card = document.createElement("div");
+            card.classList.add("drink-card");
+            card.innerHTML = `
+              <img src="http://localhost:8090${drink.image}" alt="${drink.title}">
+              <div class="drink-info">
+                <h4>${drink.title}</h4>
+                <p>${drink.details}</p>
+                <p class="price">₹${drink.price}</p>
+                <p class="location">📍 ${drink.location}</p>
+              </div>
+              <a href="#" onclick="addToCart('${drink.title}', ${drink.price}, 'http://localhost:8080${drink.image}')" class="cart-btn">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+            `;
+          drinkList.appendChild(card); });
+      } catch (err) {
+        console.error("Error loading drinks:", err); }}
+    loadDrinks();
+    // Add to cart function
+    function addToCart(title, price, imageUrl) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const index = cart.findIndex((item) => item.title === title);
+      if (index !== -1) {
+        cart[index].quantity += 1;
+      } else {
+        cart.push({ title, price, imageUrl, quantity: 1 });}
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${title} added to cart!`);}
+  requireAuth();
+</script>
+<script src="auth_route.js"></script>
+</body>
+</html>
