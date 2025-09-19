@@ -13,7 +13,7 @@ import authRoute from "./routes/auth_route.js"; // login + register
 
 // Load environment variables
 dotenv.config({ path: join(process.cwd(), ".env") });
-console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
+console.log("Loaded MONGO_URI:",process.env.MONGO_URI);
 
 // Fix __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
