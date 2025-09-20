@@ -35,9 +35,9 @@ app.use(checkoutRoute);
 app.use("/uploads", express.static(join(__dirname, "../uploads")));
 
 // Serve frontend static files
-app.use(express.static(join(__dirname, "../Frontend")));
+app.use(express.static(join(__dirname, "public")));
 app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "../Frontend", "index.html"));
+  res.sendFile(join(__dirname, "public", "index.html"));
 });
 
 // MongoDB connection
