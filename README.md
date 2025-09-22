@@ -4,7 +4,7 @@ A full-stack demo web application that simulates an online soft-drink shopping e
 ## Structure
 - **Backend:** Node.js + Express + MongoDB
 - **Frontend:** HTML, CSS, JavaScript
-- **Deployment: ** Render (live URL below)
+- **Deployment:** Render (live URL below)
 
 ## Live Demo
 The app is deployed on Render:
