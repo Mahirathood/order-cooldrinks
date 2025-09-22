@@ -17,7 +17,7 @@
     <p id="loginMessage"></p>
     <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
   </div>
-<script>
+<!-- <script>
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -40,6 +40,35 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 
+</script> -->
+<script>
+const API_BASE =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8090"
+    : "https://soft-drink-e-commerce.onrender.com";  // your Render URL
+
+const loginForm = document.getElementById("loginForm");
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch(`${API_BASE}/api/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const data = await res.json();
+  if (data.token) {
+    localStorage.setItem("token", data.token);
+    alert("Login successful!");
+    window.location.href = "index.html";
+  } else {
+    alert(data.error || "Invalid credentials");
+  }
+});
 </script>
+
 </body>
 </html>
