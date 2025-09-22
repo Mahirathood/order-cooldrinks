@@ -1,4 +1,4 @@
-# Cool Drinks Ordering Project 🥤
+# Soft-Drink-E-commerce-Demo Project 🥤
 
 A full-stack project for ordering cool drinks online.
 
