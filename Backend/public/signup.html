@@ -18,31 +18,11 @@
     <p id="signupMessage"></p>
     <p>Already have an account? <a href="login.html">Login</a></p>
   </div>
- <!-- <script>
-const signupForm = document.getElementById("signupForm");
-signupForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const res = await fetch("http://localhost:8090/api/auth/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({name, email, password }),});
-  const data = await res.json();
-  if (data.message) {
-    alert("Signup successful! Please login.");
-    window.location.href = "login.html";
-  } else {
-    alert(data.error || "Signup failed");
-  }
-});
-</script> -->
 <script>
 const API_BASE =
   window.location.hostname === "localhost"
     ? "http://localhost:8090"
-    : "https://soft-drink-e-commerce.onrender.com";  // your Render URL
+    : "https://soft-drink-e-commerce-demo.onrender.com";
 
 const signupForm = document.getElementById("signupForm");
 signupForm.addEventListener("submit", async (e) => {
@@ -51,18 +31,23 @@ signupForm.addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const res = await fetch(`${API_BASE}/api/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, password }),
-  });
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+    const data = await res.json();
 
-  const data = await res.json();
-  if (data.message) {
-    alert("Signup successful! Please login.");
-    window.location.href = "login.html";
-  } else {
-    alert(data.error || "Signup failed");
+    if (res.ok) {
+      alert("Signup successful! Please login.");
+      window.location.href = "login.html";
+    } else {
+      alert(data.error || "Signup failed");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Network error. Please try again.");
   }
 });
 </script>
