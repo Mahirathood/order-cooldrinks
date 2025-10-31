@@ -1,6 +1,7 @@
-# Soft Drink E-commerce Demo 🥤
+# Soft Drink E-commerce Demo
 
-A full-stack e-commerce web application that simulates an online soft drink shopping experience with product management, shopping cart, and checkout flow.
+This repository has been emptied as requested.
+
 
 ![Project Screenshot](frontend/public/cool1.png)
 

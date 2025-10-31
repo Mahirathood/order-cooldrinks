@@ -1,22 +1,11 @@
-// API Configuration
-export const API_BASE_URL = 'http://localhost:8090';
+// API Configuration - emptied as requested
+export const API_BASE_URL = '';
 
 // API Endpoints
-export const API_ENDPOINTS = {
-  // Auth endpoints
-  LOGIN: '/api/auth/login',
-  REGISTER: '/api/auth/register',
-
-  // Drinks endpoints
-  DRINKS: '/api/drinks',
-  TRENDING_DRINKS: '/api/drinks/trending',
-
-  // Checkout endpoint
-  CHECKOUT: '/api/checkout'
-};
+export const API_ENDPOINTS = {};
 
 // Helper function to get full API URL
-export const getApiUrl = (endpoint) => `${API_BASE_URL}${endpoint}`;
+export const getApiUrl = () => '';
 
 // Helper function to get image URL
-export const getImageUrl = (imagePath) => `${API_BASE_URL}${imagePath}`;
+export const getImageUrl = () => '';
