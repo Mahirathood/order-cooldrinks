@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: soft-drink-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 8090
