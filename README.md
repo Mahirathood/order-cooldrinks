@@ -6,7 +6,7 @@ This repository has been emptied as requested.
 ![Project Screenshot](frontend/public/cool1.png)
 
 ## 🚀 Live Demo
-
+Vercel : https://soft-drink-e-commerce-demo.vercel.app/
 Check out the live demo deployed on Render:
 [https://soft-drink-e-commerce-demo.onrender.com](https://soft-drink-e-commerce-demo.onrender.com)
 
